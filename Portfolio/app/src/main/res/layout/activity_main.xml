@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.yuriy.portfolio.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_margin="3dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="My Nanodegree Apps"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:textColor="@android:color/background_light"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Popular Movies"
+            android:id="@+id/popMovies"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="3dp"
+            android:theme="@android:style/Theme.Holo"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock Hawk"
+            android:id="@+id/stock_hawk"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="3dp"
+            android:theme="@android:style/Theme.Holo"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Build It Bigger"
+            android:id="@+id/bigger"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="3dp"
+            android:theme="@android:style/Theme.Holo"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make your app material"
+            android:id="@+id/material"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="3dp"
+            android:theme="@android:style/Theme.Holo"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go ubiquitous"
+            android:id="@+id/ubiq"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="3dp"
+            android:theme="@android:style/Theme.Holo"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Capstone"
+            android:id="@+id/capstone"
+            android:layout_gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="3dp"
+            android:theme="@android:style/Theme.Holo"/>
+    </LinearLayout>
+</RelativeLayout>
