@@ -9,7 +9,7 @@ public class SessionConfigurations {
 
     public static String baseImageUrl = "http://image.tmdb.org/t/p";
 
-    public static String logoSize = "/w92";
+    public static String logoSize = "/w185";
 
     public static String discover = "/discover/movie?";
 

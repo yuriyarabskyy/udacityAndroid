@@ -61,9 +61,6 @@ public class OverviewFragment extends Fragment {
         }
         gridview.setAdapter(images);
 
-        FetchPopularMoviesTask fetchMovies = new FetchPopularMoviesTask(images, getActivity());
-        fetchMovies.execute();
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -71,7 +68,7 @@ public class OverviewFragment extends Fragment {
             }
         });
 
-        
+
 
         return retView;
     }
@@ -84,8 +81,9 @@ public class OverviewFragment extends Fragment {
     public static class ImageAdapter extends BaseAdapter {
         private Context mContext;
         //List<Movie> movies = new ArrayList<>();
-        int page = 1;
+        int page = 0;
         public int count = 0;
+        public boolean wentToFetch = false;
 
         SQLiteOpenHelper sqlHelper;
 
@@ -129,19 +127,20 @@ public class OverviewFragment extends Fragment {
         // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            ImageView view = (ImageView) convertView;
+            SquareImageView view = (SquareImageView) convertView;
             if (view == null) {
-                view = new ImageView(mContext);
+                view = new SquareImageView(mContext);
             }
 
-            if (position >= count) {
-                FetchPopularMoviesTask fetchMovies = new FetchPopularMoviesTask(this, mContext);
-                page++;
-                fetchMovies.execute(Integer.toString(page));
-            }
+                if (position >= count && !wentToFetch) {
+                    wentToFetch = true;
+                    FetchPopularMoviesTask fetchMovies = new FetchPopularMoviesTask(this, mContext);
+                    page++;
+                    fetchMovies.execute(Integer.toString(page));
+                }
 
                 if (count == 0 || position == count) {
-                    Picasso.with(mContext).load("http://image.tmdb.org/t/p/w300/5N20rQURev5CNDcMjHVUZhpoCNC.jpg").resize(600, 600).into(view);
+                    view.setImageResource(R.drawable.downloading);
                 } else {
 
                     SQLiteDatabase db = sqlHelper.getReadableDatabase();
@@ -149,18 +148,17 @@ public class OverviewFragment extends Fragment {
                             + " where " + MovieImageContract.POSITION + " == " + position, null);
 
                     if (!c.moveToFirst()) {
-//                        Log.e("HAHAHAHAHAHA", c.getString(c.getColumnIndexOrThrow(MovieImageContract.POSTER_PATH)));
-                        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w300/5N20rQURev5CNDcMjHVUZhpoCNC.jpg").resize(600, 600).into(view);
+                        view.setImageResource(R.drawable.downloading);
                     } else {
                         String posterStr = c.getString(c.getColumnIndexOrThrow(MovieImageContract.POSTER_PATH));
                         String path = SessionConfigurations.baseImageUrl + SessionConfigurations.logoSize + posterStr;
-                        Picasso.with(mContext).load(path).resize(600, 600).into(view);
+                        Picasso.with(mContext).load(path).placeholder(R.drawable.downloading).resize(100, 100).into(view);
                     }
                     c.close();
                     db.close();
                 }
 
-            view.setScaleType(ImageView.ScaleType.FIT_XY);
+            view.setScaleType(SquareImageView.ScaleType.FIT_XY);
 
             return view;
         }
